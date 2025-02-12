@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Карта с местами</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <style>
+    body, html { margin: 0; padding: 0; height: 100%; }
+    #map { width: 100%; height: 100%; }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script>
+    // Инициализация карты
+    const map = L.map('map').setView([55.7558, 37.6173], 10); // Центр карты: Москва
+
+    // Добавление tile layer (подложки карты)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Получаем данные для маркеров
+    const places = [
+      { lat: 55.7558, lng: 37.6173, description: 'Место 1' },
+      { lat: 55.7600, lng: 37.6200, description: 'Место 2' }
+    ];
+
+    // Добавляем маркеры на карту
+    places.forEach(place => {
+      L.marker([place.lat, place.lng])
+        .addTo(map)
+        .bindPopup(`<b>${place.description}</b>`)
+        .openPopup();
+    });
+  </script>
+</body>
+</html>
