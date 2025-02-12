@@ -1,0 +1,1 @@
+# way-map-bot
